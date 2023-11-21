@@ -13,25 +13,25 @@
 <div id="topSellersCarousel" class="carousel slide" data-ride="carousel" style="max-width: 400px; margin: auto;">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="Assignment/images\After-School_Jacket_(Black).png" class="d-block w-100" alt="After-School Jacket (Black)">
+            <img src="images\After-School_Jacket_(Black).png" class="d-block w-100" alt="After-School Jacket (Black)">
             <div class="carousel-caption d-none d-md-block">
                 <h5>After-School Jacket (Black)</h5>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="Assignment/images\Checkered_School_Skirt_(Dark_Gray).png" class="d-block w-100" alt="Checkered School Skirt (Dark Gray)">
+            <img src="images\Checkered_School_Skirt_(Dark_Gray).png" class="d-block w-100" alt="Checkered School Skirt (Dark Gray)">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Checkered School Skirt (Dark Gray)</h5>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="Assignment/images\Double_Nose_Tissues.png" class="d-block w-100" alt="Double Nose Tissues">
+            <img src="images\Double_Nose_Tissues.png" class="d-block w-100" alt="Double Nose Tissues">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Double Nose Tissues</h5>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="Assignment/images\Labelle_Socks_(Midnight).png" class="d-block w-100" alt="Labelle Socks (Midnight)">
+            <img src="images\Labelle_Socks_(Midnight).png" class="d-block w-100" alt="Labelle Socks (Midnight)">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Labelle Socks (Midnight)</h5>
             </div>
