@@ -2,6 +2,8 @@
     include 'includes/header.php';
 ?>
 
+<h1 class="text-center mt-3 mb-4">Sign In</h1>
+
 <!-- Sign In -->
 <div class="container mt-4">
     <div class="row justify-content-center">

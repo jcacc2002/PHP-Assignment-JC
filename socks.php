@@ -2,6 +2,8 @@
     include 'includes/header.php';
 ?>
 
+<h1 class="text-center mt-3 mb-4">Socks</h1>
+
 <!-- Product Cards -->
 <div class="container mt-4">
     <div class="row">
