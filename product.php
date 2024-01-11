@@ -1,25 +1,55 @@
 <?php
-    include 'includes/header.php';
+include 'includes/header.php';
+include 'includes/dbh.php'; 
+session_start();
+
+if (isset($_GET['productId'])) {
+    $productId = intval($_GET['productId']); 
+
+    $stmt = $conn->prepare("SELECT productName, productDescription, productPrice, productImage FROM products WHERE productId = ?");
+    $stmt->bind_param("i", $productId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $product = $result->fetch_assoc();
+        // Display the product details
+        ?>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="<?php echo htmlspecialchars($product['productImage']); ?>" class="img-fluid" alt="<?php echo htmlspecialchars($product['productName']); ?>">
+                </div>
+                <div class="col-md-6">
+                    <h2><?php echo htmlspecialchars($product['productName']); ?></h2>
+                    <p><?php echo htmlspecialchars($product['productDescription']); ?></p>
+                    <p>Price: €<?php echo htmlspecialchars($product['productPrice']); ?></p>
+                    <form action="handlers/addToCart.php" method="post">
+                        <input type="hidden" name="productID" value="<?php echo htmlspecialchars($productId); ?>">
+                        <input type="number" name="productQuantity" value="1" min="1">
+                        <button type="submit" class="btn btn-success">Add to Cart</button>
+                    </form>
+                    <button class="btn btn-info">Edit</button>
+                        <form action="handlers/deleteProduct.php" method="post">
+                        <input type="hidden" name="productID" value="<?php echo htmlspecialchars($productId); ?>">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <?php
+    } else {
+        echo "Product not found";
+    }
+
+    $stmt->close();
+} else {
+    echo "No product specified";
+}
+
 ?>
 
-<!-- Product Details -->
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md-6">
-            <img src="images\Labelle_Socks_(Midnight).png" class="img-fluid" alt="Labelle Socks (Midnight)">
-        </div>
-        <div class="col-md-6">
-            <h2>Labelle Socks (Midnight)</h2>
-            <p>These amazing socks were designed by one of our own. Our sister Labelle has been tirelessly working to bring you the best clothes on this island.</p>
-            <p>Price: €20.00 (Per Sock)</p>
-            <button class="btn btn-success">Add to Cart</button>
-            <button class="btn btn-info">Edit</button>
-            <button class="btn btn-danger">Delete</button>
 
-        </div>
-    </div>
-</div>
-<!-- End Product Details -->
 
 <!-- Comment Section -->
 <div class="row mt-4 px-3">

@@ -1,6 +1,7 @@
 <?php
     include 'includes/header.php';
     include 'includes/userfunctions.php';
+    //include 'includes/dbh.php';
 ?>
 
 <h1 class="text-center mt-3 mb-4">Sign Up</h1>

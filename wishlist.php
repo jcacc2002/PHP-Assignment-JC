@@ -1,25 +1,24 @@
 <?php
 session_start();
 include 'includes/header.php';
-include 'includes/dbh.php'; 
+include 'includes/dbh.php';
 
 if (!isset($_SESSION['userID'])) {
-    echo "Please log in to view your cart.";
+    echo "Please log in to view your wishlist.";
     exit();
 }
 
 $userID = $_SESSION['userID'];
 
-// Fetch cart items for the logged-in user
-$stmt = $conn->prepare("SELECT p.productID, p.productName, p.productImage, c.productQuantity FROM products p JOIN cart c ON p.productId = c.productID WHERE c.userID = ?");
+// Fetch wishlist items for the logged-in user
+$stmt = $conn->prepare("SELECT p.productName, p.productImage, p.productID FROM products p JOIN wishlists w ON p.productId = w.productID WHERE w.userID = ?");
 $stmt->bind_param("i", $userID);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
 
-<h1 class="text-center mt-3 mb-4">Shopping Cart</h1>
+<h1 class="text-center mt-3 mb-4">Wishlist</h1>
 
-<!-- Shopping Cart -->
 <div class="container mt-4">
     <div class="row">
         <?php
@@ -36,11 +35,7 @@ $result = $stmt->get_result();
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo htmlspecialchars($row['productName']); ?></h5>
-                                    <div class="form-group">
-                                        <label>Quantity:</label>
-                                        <input type="number" class="form-control" value="<?php echo htmlspecialchars($row['productQuantity']); ?>" min="1">
-                                    </div>
-                                    <form action="handlers/removeFromCart.php" method="post">
+                                    <form action="handlers/removeFromWishlist.php" method="post">
                                         <input type="hidden" name="productID" value="<?php echo htmlspecialchars($row['productID']); ?>"> <!-- Assuming you have productID in your $row -->
                                         <button type="submit" class="btn btn-danger">Remove</button>
                                     </form>
@@ -53,19 +48,10 @@ $result = $stmt->get_result();
                 <?php
             }
         } else {
-            echo "<p>Your cart is empty.</p>";
+            echo "<p>Your wishlist is empty.</p>";
         }
         ?>
-        <!-- Buy Now Button -->
-        <div class="row justify-content-center mb-4">
-            <a href="paymentmethod.php" class="btn btn-primary">Buy Now</a>
-        </div>
-        <!-- End Buy Now Button -->
-
     </div>
 </div>
-<!-- End Shopping Cart -->
 
-<?php
-include 'includes/footer.php';
-?>
+<?php include 'includes/footer.php'; ?>

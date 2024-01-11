@@ -21,7 +21,7 @@ function handleUserSignup() {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     
         // Prepare SQL statement with placeholders
-        $stmt = $conn->prepare("INSERT INTO user (username, emailAddress, password, firstName, lastName, userAddress, phoneNumber) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO users (username, emailAddress, password, firstName, lastName, userAddress, phoneNumber) VALUES (?, ?, ?, ?, ?, ?, ?)");
     
         if ($stmt === false) {
             die("Error preparing statement: " . $conn->error);

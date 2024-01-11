@@ -9,6 +9,14 @@
 </head>
 
 <body>
+
+<?php
+include 'includes/dbh.php';
+
+$query = "SELECT categoryID, categoryName FROM categories";  
+$categories = $conn->query($query);
+?>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="index.php">Able Sisters Co.</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,6 +32,8 @@
                     <a class="dropdown-item" href="signup.php">Sign Up</a>
                     <a class="dropdown-item" href="signin.php">Sign In</a>
                     <a class="dropdown-item" href="editdetails.php">Edit Details</a>
+                    <div class="dropdown-divider"></div> <!-- Divider line -->
+                    <a class="dropdown-item" href="handlers/logout.php">Logout</a> <!-- Logout link -->
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -31,17 +41,22 @@
                     Products
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Headwear</a>
-                    <a class="dropdown-item" href="#">Accessories</a>
-                    <a class="dropdown-item" href="#">Shirts</a>
-                    <a class="dropdown-item" href="#">Pants</a>
-                    <a class="dropdown-item" href="#">Dresses</a>
-                    <a class="dropdown-item" href="socks.php">Socks</a>
-                    <a class="dropdown-item" href="#">Shoes</a>
+                    <?php if ($categories->num_rows > 0): ?>
+                        <?php while ($category = $categories->fetch_assoc()): ?>
+                            <a class="dropdown-item" href="products.php?categoryId=<?php echo htmlspecialchars($category['categoryID']); ?>">
+                                <?php echo htmlspecialchars($category['categoryName']); ?>
+                            </a>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <p class="dropdown-item">No categories available</p>
+                    <?php endif; ?>
                 </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="shoppingcart.php">Shopping Cart</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="wishlist.php">Wishlist</a>
             </li>
         </ul>
     </div>

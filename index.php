@@ -1,5 +1,7 @@
 <?php
     include 'includes/header.php';
+    include 'includes/dbh.php';
+    session_start();
 ?>
 
 
