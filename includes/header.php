@@ -32,8 +32,9 @@ $categories = $conn->query($query);
                     <a class="dropdown-item" href="signup.php">Sign Up</a>
                     <a class="dropdown-item" href="signin.php">Sign In</a>
                     <a class="dropdown-item" href="editdetails.php">Edit Details</a>
-                    <div class="dropdown-divider"></div> <!-- Divider line -->
-                    <a class="dropdown-item" href="handlers/logout.php">Logout</a> <!-- Logout link -->
+                    <a class="dropdown-item" href="orders.php">My Orders</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="handlers/logout.php">Logout</a> 
                 </div>
             </li>
             <li class="nav-item dropdown">

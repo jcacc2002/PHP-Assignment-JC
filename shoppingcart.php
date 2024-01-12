@@ -36,10 +36,14 @@ $result = $stmt->get_result();
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo htmlspecialchars($row['productName']); ?></h5>
-                                    <div class="form-group">
-                                        <label>Quantity:</label>
-                                        <input type="number" class="form-control" value="<?php echo htmlspecialchars($row['productQuantity']); ?>" min="1">
-                                    </div>
+                                    <form action="handlers/updateCartQuantity.php" method="post">
+                                        <div class="form-group">
+                                            <label>Quantity:</label>
+                                            <input type="number" class="form-control" name="productQuantity" value="<?php echo htmlspecialchars($row['productQuantity']); ?>" min="1">
+                                        </div>
+                                    <input type="hidden" name="productID" value="<?php echo htmlspecialchars($row['productID']); ?>">
+                                    <button type="submit" class="btn btn-info">Update Quantity</button>
+                                    </form>
                                     <form action="handlers/removeFromCart.php" method="post">
                                         <input type="hidden" name="productID" value="<?php echo htmlspecialchars($row['productID']); ?>"> <!-- Assuming you have productID in your $row -->
                                         <button type="submit" class="btn btn-danger">Remove</button>
@@ -58,7 +62,9 @@ $result = $stmt->get_result();
         ?>
         <!-- Buy Now Button -->
         <div class="row justify-content-center mb-4">
-            <a href="paymentmethod.php" class="btn btn-primary">Buy Now</a>
+            <form action="handlers/createOrder.php" method="post">
+                <button type="submit" class="btn btn-primary">Buy Now</button>
+            </form>
         </div>
         <!-- End Buy Now Button -->
 
